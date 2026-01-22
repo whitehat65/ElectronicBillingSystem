@@ -1,0 +1,87 @@
+ER Diagram (text representation) for ElectricityBillingSystem
+
+Entities:
+1. Customers
+   - customer_id (PK)
+   - customer_code
+   - name
+   - address
+   - connection_no
+   - tariff_id (FK -> Tariffs.tariff_id)
+   - status
+   - contact_phone
+   - contact_email
+
+2. Meters
+   - meter_id (PK)
+   - customer_id (FK -> Customers.customer_id)
+   - meter_no
+   - install_date
+   - meter_type
+   - multiplier
+
+3. Tariffs
+   - tariff_id (PK)
+   - name
+   - description
+   - tariff_json
+   - fixed_charge
+
+4. Readings
+   - reading_id (PK)
+   - meter_id (FK -> Meters.meter_id)
+   - reading_date
+   - reading_value
+
+5. Bills
+   - bill_id (PK)
+   - customer_id (FK -> Customers.customer_id)
+   - period_start
+   - period_end
+   - units_consumed
+   - energy_charge
+   - fixed_charge
+   - tax_amount
+   - other_charges
+   - total_amount
+   - due_date
+   - status
+
+6. Payments
+   - payment_id (PK)
+   - bill_id (FK -> Bills.bill_id)
+   - customer_id (FK -> Customers.customer_id)
+   - payment_date
+   - amount
+   - mode
+   - reference
+
+7. Users
+   - user_id (PK)
+   - username
+   - password_hash
+   - full_name
+   - role
+   - email
+
+8. AuditLogs
+   - log_id (PK)
+   - user_id (FK -> Users.user_id)
+   - action
+   - details
+
+Relationships:
+- Customers 1..* Meters (one customer may have many meters; meter references customer)
+- Meters 1..* Readings (one meter many readings)
+- Customers 1..* Bills (one customer many bills)
+- Bills 0..* Payments (bill may have many payments)
+- Customers 1..* Payments (customer may make many payments)
+- Tariffs 1..* Customers (one tariff can apply to many customers)
+- Users 1..* AuditLogs
+
+Notes:
+- Tariff slabs are stored as JSON for flexibility. For complex tariff rules a separate TariffSlabs table is recommended.
+- Readings enforce unique meter/date per period to avoid duplicate entries.
+- Foreign keys use ON DELETE behaviors chosen to preserve historical records appropriately.
+
+Recommended visual ER tool: draw.io / dbdiagram.io / MySQL Workbench

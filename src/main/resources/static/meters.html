@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meters - Electricity Billing System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ EBS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="customers.html">Customers</a></li>
+                <li><a href="meters.html" class="active">Meters</a></li>
+                <li><a href="tariffs.html">Tariffs</a></li>
+                <li><a href="readings.html">Readings</a></li>
+                <li><a href="bills.html">Bills</a></li>
+                <li><a href="payments.html">Payments</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Meters</h1>
+                <button class="btn btn-primary" onclick="showMeterForm()">+ Add Meter</button>
+            </div>
+            
+            <div id="meterForm" class="form-section" style="display: none;">
+                <h2>Add New Meter</h2>
+                <form id="meterFormElement" onsubmit="handleMeter(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerId">Customer *</label>
+                            <select id="customerId" required>
+                                <option value="">Select Customer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="meterNo">Meter No *</label>
+                            <input type="text" id="meterNo" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="installDate">Install Date</label>
+                            <input type="date" id="installDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="meterType">Meter Type</label>
+                            <input type="text" id="meterType" placeholder="e.g., Single Phase">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="multiplier">Multiplier</label>
+                        <input type="number" id="multiplier" step="0.0001" value="1.0">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Meter</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideMeterForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="content-section">
+                <h2>All Meters</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Meter No</th>
+                                <th>Customer</th>
+                                <th>Type</th>
+                                <th>Install Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metersTable">
+                            <tr>
+                                <td colspan="5" class="loading">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/meters.js"></script>
+</body>
+</html>

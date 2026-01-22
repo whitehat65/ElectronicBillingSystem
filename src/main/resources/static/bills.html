@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bills - Electricity Billing System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ EBS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="customers.html">Customers</a></li>
+                <li><a href="meters.html">Meters</a></li>
+                <li><a href="tariffs.html">Tariffs</a></li>
+                <li><a href="readings.html">Readings</a></li>
+                <li><a href="bills.html" class="active">Bills</a></li>
+                <li><a href="payments.html">Payments</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Bills</h1>
+                <button class="btn btn-primary" onclick="showGenerateForm()">+ Generate Bill</button>
+            </div>
+            
+            <!-- Generate Bill Form -->
+            <div id="generateForm" class="form-section" style="display: none;">
+                <h2>Generate New Bill</h2>
+                <form id="billForm" onsubmit="handleGenerate(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerId">Customer *</label>
+                            <select id="customerId" required>
+                                <option value="">Select Customer</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="periodStart">Period Start *</label>
+                            <input type="date" id="periodStart" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="periodEnd">Period End *</label>
+                            <input type="date" id="periodEnd" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Generate Bill</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideGenerateForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Bills List -->
+            <div class="content-section">
+                <h2>All Bills</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Bill ID</th>
+                                <th>Customer</th>
+                                <th>Period</th>
+                                <th>Units</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billsTable">
+                            <tr>
+                                <td colspan="7" class="loading">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/bills.js"></script>
+</body>
+</html>

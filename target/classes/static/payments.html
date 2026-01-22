@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments - Electricity Billing System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ EBS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="customers.html">Customers</a></li>
+                <li><a href="meters.html">Meters</a></li>
+                <li><a href="tariffs.html">Tariffs</a></li>
+                <li><a href="readings.html">Readings</a></li>
+                <li><a href="bills.html">Bills</a></li>
+                <li><a href="payments.html" class="active">Payments</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Payments</h1>
+                <button class="btn btn-primary" onclick="showPaymentForm()">+ Record Payment</button>
+            </div>
+            
+            <!-- Payment Form -->
+            <div id="paymentForm" class="form-section" style="display: none;">
+                <h2>Record Payment</h2>
+                <form id="paymentFormElement" onsubmit="handlePayment(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="billId">Bill *</label>
+                            <select id="billId" required onchange="loadBillDetails()">
+                                <option value="">Select Bill</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentDate">Payment Date *</label>
+                            <input type="date" id="paymentDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="amount">Amount *</label>
+                            <input type="number" id="amount" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mode">Payment Mode *</label>
+                            <select id="mode" required>
+                                <option value="CASH">Cash</option>
+                                <option value="CHEQUE">Cheque</option>
+                                <option value="ONLINE">Online</option>
+                                <option value="CARD">Card</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reference">Reference</label>
+                        <input type="text" id="reference" placeholder="Transaction reference number">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Record Payment</button>
+                        <button type="button" class="btn btn-secondary" onclick="hidePaymentForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Payments List -->
+            <div class="content-section">
+                <h2>All Payments</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Payment ID</th>
+                                <th>Bill ID</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Mode</th>
+                                <th>Reference</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTable">
+                            <tr>
+                                <td colspan="6" class="loading">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/payments.js"></script>
+</body>
+</html>

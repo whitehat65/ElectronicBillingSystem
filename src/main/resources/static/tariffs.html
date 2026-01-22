@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tariffs - Electricity Billing System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ EBS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="customers.html">Customers</a></li>
+                <li><a href="meters.html">Meters</a></li>
+                <li><a href="tariffs.html" class="active">Tariffs</a></li>
+                <li><a href="readings.html">Readings</a></li>
+                <li><a href="bills.html">Bills</a></li>
+                <li><a href="payments.html">Payments</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Tariffs</h1>
+                <button class="btn btn-primary" onclick="showTariffForm()">+ Add Tariff</button>
+            </div>
+            
+            <div id="tariffForm" class="form-section" style="display: none;">
+                <h2>Add New Tariff</h2>
+                <form id="tariffFormElement" onsubmit="handleTariff(event)">
+                    <div class="form-group">
+                        <label for="name">Tariff Name *</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fixedCharge">Fixed Charge (₹)</label>
+                        <input type="number" id="fixedCharge" step="0.01" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tariff JSON (Slabs Configuration) *</label>
+                        <textarea id="tariffJson" rows="8" required placeholder='{"slabs":[{"upto":100,"rate":2.5},{"upto":200,"rate":3.5},{"rate":5.0}],"tax_percent":10}'></textarea>
+                        <small>Example: {"slabs":[{"upto":100,"rate":2.5},{"rate":5.0}],"tax_percent":10}</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Tariff</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideTariffForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="content-section">
+                <h2>All Tariffs</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Fixed Charge</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tariffsTable">
+                            <tr>
+                                <td colspan="4" class="loading">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/tariffs.js"></script>
+</body>
+</html>

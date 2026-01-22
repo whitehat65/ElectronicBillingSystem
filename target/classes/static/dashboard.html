@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Electricity Billing System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ EBS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="customers.html">Customers</a></li>
+                <li><a href="meters.html">Meters</a></li>
+                <li><a href="tariffs.html">Tariffs</a></li>
+                <li><a href="readings.html">Readings</a></li>
+                <li><a href="bills.html">Bills</a></li>
+                <li><a href="payments.html">Payments</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p id="userInfo">Welcome, <span id="userName"></span></p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Customers</h3>
+                    <p class="stat-value" id="totalCustomers">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Bills</h3>
+                    <p class="stat-value" id="totalBills">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Unpaid Bills</h3>
+                    <p class="stat-value" id="unpaidBills">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Revenue</h3>
+                    <p class="stat-value" id="totalRevenue">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Outstanding Amount</h3>
+                    <p class="stat-value" id="outstandingAmount">₹0</p>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="customers.html" class="btn btn-primary">Add New Customer</a>
+                    <a href="readings.html" class="btn btn-secondary">Record Reading</a>
+                    <a href="bills.html" class="btn btn-success">Generate Bill</a>
+                    <a href="payments.html" class="btn btn-info">Record Payment</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
