@@ -30,11 +30,12 @@ async function loadMeters() {
         }
         
         tbody.innerHTML = meters.map(meter => {
-            const customer = customers.find(c => c.customerId === meter.customerId);
+            // Use the nested customer object from the meter response (EAGER fetching)
+            const customerName = meter.customer ? meter.customer.name : 'N/A';
             return `
                 <tr>
                     <td>${meter.meterNo}</td>
-                    <td>${customer ? customer.name : 'N/A'}</td>
+                    <td>${customerName}</td>
                     <td>${meter.meterType || '-'}</td>
                     <td>${formatDate(meter.installDate)}</td>
                     <td><span class="badge badge-${meter.status === 'INSTALLED' ? 'success' : 'warning'}">${meter.status}</span></td>

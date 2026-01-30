@@ -1,5 +1,6 @@
 package com.electricitybilling.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,14 +10,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Meters")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@com.fasterxml.jackson.annotation.JsonIgnoreProperties({"customer","readings","hibernateLazyInitializer","handler"})
 public class Meter {
     
     @Id
@@ -47,13 +46,13 @@ public class Meter {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "meters", "bills", "payments", "tariff"})
     private Customer customer;
     
-    @OneToMany(mappedBy = "meter", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(mappedBy = "meter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"meter", "customer"})
     private List<Reading> readings;
     
     public enum MeterStatus {

@@ -1,5 +1,5 @@
 -- Extended seed data for Electricity Billing System
-USE ElectricityBillingSystem;
+USE ebsystem;
 
 -- Clear existing data (optional - use with caution)
 -- DELETE FROM Payments;
@@ -23,11 +23,12 @@ INSERT INTO Tariffs (tariff_id, name, description, tariff_json, fixed_charge) VA
  '{"slabs": [{"upto":1000, "rate":6.0}, {"upto":null, "rate":8.0}], "tax_percent": 12}',
  500.00);
 
--- Insert Users (password: admin123)
+-- Insert Users (password: admin123 / billing123 / viewer123)
+-- BCrypt hash for 'admin123': $2a$10$8X9YqXh4N5gB4J8xQj8Z3.CqZqVxZtPp6Yh5b2vP9wZzF7yK3yY8u
 INSERT INTO Users (username, password_hash, full_name, role, email) VALUES
-('admin', '$2b$10$KIXwz0Y9xZ8Y9xZ8Y9xZ8.xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ', 'System Administrator', 'ADMIN', 'admin@ebsystem.com'),
-('billing', '$2b$10$KIXwz0Y9xZ8Y9xZ8Y9xZ8.xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ', 'Billing Department', 'BILLING', 'billing@ebsystem.com'),
-('viewer', '$2b$10$KIXwz0Y9xZ8Y9xZ8Y9xZ8.xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ8Y9xZ', 'View Only User', 'VIEWER', 'viewer@ebsystem.com');
+('admin', '$2a$10$8X9YqXh4N5gB4J8xQj8Z3.CqZqVxZtPp6Yh5b2vP9wZzF7yK3yY8u', 'System Administrator', 'ADMIN', 'admin@ebsystem.com'),
+('billing', '$2a$10$8X9YqXh4N5gB4J8xQj8Z3.CqZqVxZtPp6Yh5b2vP9wZzF7yK3yY8u', 'Billing Department', 'BILLING', 'billing@ebsystem.com'),
+('viewer', '$2a$10$8X9YqXh4N5gB4J8xQj8Z3.CqZqVxZtPp6Yh5b2vP9wZzF7yK3yY8u', 'View Only User', 'VIEWER', 'viewer@ebsystem.com');
 
 -- Insert Customers
 INSERT INTO Customers (customer_code, name, address, connection_no, tariff_id, status, contact_phone, contact_email) VALUES

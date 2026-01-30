@@ -30,11 +30,12 @@ async function loadBills() {
         }
         
         tbody.innerHTML = bills.map(bill => {
-            const customer = customers.find(c => c.customerId === bill.customerId);
+            // Use the nested customer object from the bill response (EAGER fetching)
+            const customerName = bill.customer ? bill.customer.name : 'N/A';
             return `
                 <tr>
                     <td>${bill.billId}</td>
-                    <td>${customer ? customer.name : 'N/A'}</td>
+                    <td>${customerName}</td>
                     <td>${formatDate(bill.periodStart)} - ${formatDate(bill.periodEnd)}</td>
                     <td>${parseFloat(bill.unitsConsumed).toFixed(2)}</td>
                     <td>${formatCurrency(bill.totalAmount)}</td>

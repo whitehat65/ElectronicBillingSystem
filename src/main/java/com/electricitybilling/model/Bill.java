@@ -1,5 +1,6 @@
 package com.electricitybilling.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "Bills")
+@Table(name = "bills")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -60,11 +61,13 @@ public class Bill {
     @Column(name = "generated_at", updatable = false)
     private LocalDateTime generatedAt;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "meters", "bills", "payments", "tariff"})
     private Customer customer;
     
-    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"bill", "customer"})
     private List<Payment> payments;
     
     public enum BillStatus {

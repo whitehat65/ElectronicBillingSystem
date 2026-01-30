@@ -52,9 +52,9 @@ public class Customer {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id", insertable = false, updatable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "customers"})
     private Tariff tariff;
     
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)

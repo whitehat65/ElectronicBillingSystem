@@ -21,6 +21,7 @@ com\electricitybilling\dto\LoginRequest.class
 com\electricitybilling\model\User.class
 com\electricitybilling\model\Bill$BillStatus.class
 com\electricitybilling\repository\CustomerRepository.class
+com\electricitybilling\util\AdminUserSeeder.class
 com\electricitybilling\config\WebConfig.class
 com\electricitybilling\repository\ReadingRepository.class
 com\electricitybilling\model\Meter$MeterStatus.class

@@ -20,6 +20,7 @@ D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\cont
 D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\dto\DashboardResponse.java
 D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\repository\BillRepository.java
 D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\service\BillService.java
+D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\util\AdminUserSeeder.java
 D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\controller\CustomerController.java
 D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\config\SecurityConfig.java
 D:\development\ElectronicBillingSystem\src\main\java\com\electricitybilling\dto\LoginRequest.java

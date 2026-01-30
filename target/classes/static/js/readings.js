@@ -32,10 +32,6 @@ async function loadMetersDropdown() {
 // Load readings
 async function loadReadings() {
     try {
-        // ensure lookup data is present
-        if (!customers.length) await loadCustomers();
-        if (!meters.length) await loadMetersDropdown();
-
         readings = await api.get('/readings');
         const tbody = document.getElementById('readingsTable');
         
@@ -45,13 +41,14 @@ async function loadReadings() {
         }
         
         tbody.innerHTML = readings.map(reading => {
-            const meter = meters.find(m => m.meterId === reading.meterId);
-            const customer = meter ? customers.find(c => c.customerId === meter.customerId) : null;
+            // Use the nested meter and customer objects from the reading response (EAGER fetching)
+            const meterNo = reading.meter ? reading.meter.meterNo : 'N/A';
+            const customerName = (reading.meter && reading.meter.customer) ? reading.meter.customer.name : 'N/A';
             return `
                 <tr>
                     <td>${reading.readingId}</td>
-                    <td>${meter ? meter.meterNo : 'N/A'}</td>
-                    <td>${customer ? customer.name : 'N/A'}</td>
+                    <td>${meterNo}</td>
+                    <td>${customerName}</td>
                     <td>${formatDate(reading.readingDate)}</td>
                     <td>${parseFloat(reading.readingValue).toFixed(3)}</td>
                 </tr>
